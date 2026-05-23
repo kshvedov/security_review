@@ -27,11 +27,23 @@ Not a fit:
 
 ## How To Use It
 
-If the skill is installed in your AI tool, you do not need to say `Read skill/SKILL.md`.
+### Quick Install From Zip
+
+If your AI tool supports importing a skill from a zip file, download `security_review.zip` from this repo and import it.
+
+The zip contains the installable `skill/` package only. It does not include eval fixtures or generated responses.
+
+After import, call the skill explicitly with `/security_review`.
+
+If you edit the source files under `skill/`, regenerate `security_review.zip` before sharing it.
+
+If the skill is installed in your AI tool, call it explicitly. This avoids accidental activation and avoids expensive deep reviews when you only wanted a normal answer.
 
 Ask your question in this shape:
 
 ```text
+/security_review
+
 Analysis depth: Quick
 Output type: non-technical
 
@@ -39,10 +51,22 @@ Question:
 Can I paste this redacted customer issue summary into an AI chat to make it clearer?
 ```
 
-If your AI tool supports explicit skill names, you can also say:
+For a short usage guide after installation, ask:
 
 ```text
-Use the security-review skill.
+/security_review help
+```
+
+or:
+
+```text
+security_review --help
+```
+
+If your AI tool does not support slash commands, you can also say:
+
+```text
+Use the security_review skill.
 
 Analysis depth: Medium
 Output type: technical

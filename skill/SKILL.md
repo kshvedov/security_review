@@ -1,11 +1,17 @@
 ---
-name: security-review
-description: Use for security review, code/config/cloud/API/auth/data/AI/vendor/action-safety questions, non-dev safety checks, accidental exposure of company data, and risks involving secrets, PII, logs, screenshots, files, permissions, integrations, and AI tools.
+name: security_review
+description: Use only when the user explicitly invokes `/security_review`, asks for the security_review skill, or requests help for this skill. Handles security review, action-safety checks, code/config/cloud/API/auth/data/AI/vendor risks, non-dev safety checks, accidental exposure of company data, secrets, PII, logs, screenshots, files, permissions, integrations, and AI tools.
 ---
 
 # Security Review Skill
 
 This `SKILL.md` is a lean router. Load reference files as needed, classify risk, preserve safe evidence handling, and provide safer alternatives without teaching exploitation.
+
+## Help Requests
+
+If the user asks for help using this skill, including `/security_review help`, `/security_review --help`, `security_review --help`, `help`, or "how do I use this skill?", read `references/help.md` and answer with the concise usage guide. Do not use the full audit output format for help-only requests.
+
+Do not auto-select Indepth unless the user explicitly requests Indepth, deep, comprehensive, full, final-gate, or release-blocking review.
 
 ## Core Routing Rules
 
