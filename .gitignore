@@ -1,0 +1,22 @@
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local/runtime
+.cache/
+tmp/
+*.log
+
+# Generated eval outputs
+evals/results/
+evals/runs/
+evals/*.response.md
+
+# Research/workspace artifacts if accidentally copied
+outputs/
+prompt_layers/
+step_2A_route_a_direct_prompt99/
+skill_packaging_plan/
+final_skill/

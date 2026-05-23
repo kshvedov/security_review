@@ -1,0 +1,9 @@
+user_id,full_name,email,role,department,account_status,last_login,customer_tier,phone,account_id,session_ref,operator_note
+USR-1007,Arrell Patel,arrell.patel@asterridge.corp,Global Admin,Finance Operations,Active,2026-05-21 21:46:12,Enterprise,+1-415-555-0138,AC-774219,SESS-4B7F-93A2,Quarter close owner with unrestricted export access
+USR-1042,Maren Kline,maren.kline@asterridge.corp,Billing Manager,Revenue Operations,Active,2026-05-21 18:12:44,Enterprise,+1-628-555-0184,AC-774220,SESS-9A11-1CF8,Can approve payment holds below 25000 USD
+USR-1179,Devon Ibarra,devon.ibarra@asterridge.corp,Support Lead,Customer Operations,Active,2026-05-20 09:33:27,Premier,+1-510-555-0162,AC-774231,SESS-3C8D-44AA,Handles escalated refund cases for east region
+USR-1214,Priya Shah,priya.shah@asterridge.corp,Analyst,Finance Operations,Suspended,2026-05-13 14:28:09,Standard,+1-408-555-0196,AC-774242,SESS-6D20-8B01,Account retained for invoice reconciliation
+USR-1288,Evan Park,evan.park@asterridge.corp,Read Only Auditor,Corporate Audit,Active,2026-05-19 07:51:38,Enterprise,+1-650-555-0171,AC-774255,SESS-112C-7F39,Reviews export events before board package
+USR-1326,Sofia Reyes,sofia.reyes@asterridge.corp,Collections Specialist,Revenue Operations,Active,2026-05-21 16:04:55,Premier,+1-925-555-0149,AC-774268,SESS-8871-0DA4,May contact customers with overdue invoices
+USR-1441,Miles Carter,miles.carter@asterridge.corp,Integration Owner,Platform Operations,Active,2026-05-22 06:41:19,Enterprise,+1-415-555-0178,AC-774271,SESS-2A6E-55C0,Owns ledger worker service account mapping
+USR-1510,Nadia Flores,nadia.flores@asterridge.corp,Contractor,Finance Operations,Pending Review,2026-05-11 11:22:31,Standard,+1-669-555-0188,AC-774289,SESS-71BF-442D,Temporary access extended for close support

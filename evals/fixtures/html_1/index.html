@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aster Ridge Finance Operations</title>
+  <style>
+    :root {
+      --bg: #f3f5f8;
+      --panel: #ffffff;
+      --panel-soft: #f8fafc;
+      --ink: #172033;
+      --muted: #5b667a;
+      --line: #d8dee8;
+      --nav: #102032;
+      --nav-soft: #1f344a;
+      --blue: #2368a2;
+      --teal: #16817a;
+      --amber: #b7791f;
+      --red: #b42318;
+      --green: #26794f;
+      --shadow: 0 18px 42px rgba(23, 32, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .shell {
+      display: grid;
+      grid-template-columns: 248px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background: var(--nav);
+      color: #e8eef6;
+      padding: 24px 18px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .brand-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 8px;
+      background: #e9b44c;
+      color: #102032;
+      font-weight: 800;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 15px;
+      letter-spacing: 0;
+    }
+
+    .brand span {
+      color: #a9b8ca;
+      font-size: 12px;
+    }
+
+    .nav-group {
+      display: grid;
+      gap: 6px;
+      margin: 26px 0;
+    }
+
+    .nav-label {
+      color: #93a4b8;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      margin: 0 10px 8px;
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      border-radius: 8px;
+      color: #d8e4f2;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 11px;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      background: var(--nav-soft);
+    }
+
+    .sidebar-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      margin-top: 34px;
+      padding: 14px;
+    }
+
+    .sidebar-card span {
+      color: #b9c7d7;
+      display: block;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    main {
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .topbar {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    .topbar h1 {
+      font-size: 24px;
+      letter-spacing: 0;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .topbar p {
+      color: var(--muted);
+      margin: 4px 0 0;
+    }
+
+    .actions {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .button,
+    button {
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      font: inherit;
+      font-weight: 700;
+      gap: 8px;
+      min-height: 38px;
+      padding: 8px 12px;
+    }
+
+    .button.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #ffffff;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      min-height: 126px;
+      padding: 18px;
+    }
+
+    .metric label {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    .metric small {
+      color: var(--muted);
+      display: block;
+      margin-top: 10px;
+    }
+
+    .bar {
+      background: #e5eaf1;
+      border-radius: 999px;
+      height: 8px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+    }
+
+    .bar .blue {
+      background: var(--blue);
+    }
+
+    .bar .teal {
+      background: var(--teal);
+    }
+
+    .bar .amber {
+      background: var(--amber);
+    }
+
+    .bar .red {
+      background: var(--red);
+    }
+
+    .content-grid {
+      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
+      margin-top: 18px;
+    }
+
+    .panel {
+      overflow: hidden;
+    }
+
+    .panel-header {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding: 15px 16px;
+    }
+
+    .panel-header h2 {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .panel-header span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .search-row {
+      align-items: center;
+      background: var(--panel-soft);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 10px;
+      padding: 12px 16px;
+    }
+
+    input,
+    select {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font: inherit;
+      min-height: 38px;
+      padding: 8px 10px;
+      width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      max-width: 260px;
+      overflow-wrap: anywhere;
+      padding: 11px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fbfcfe;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    tbody tr:hover {
+      background: #f7fafc;
+    }
+
+    .status {
+      border-radius: 999px;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 9px;
+      white-space: nowrap;
+    }
+
+    .status.green {
+      background: #e8f5ee;
+      color: var(--green);
+    }
+
+    .status.amber {
+      background: #fff4df;
+      color: var(--amber);
+    }
+
+    .status.red {
+      background: #feeceb;
+      color: var(--red);
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .record {
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .record strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .record span {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+    }
+
+    .admin-panel {
+      display: none;
+      margin-top: 18px;
+    }
+
+    .admin-panel.visible {
+      display: block;
+    }
+
+    .config-grid {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+    }
+
+    .config-row {
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      display: grid;
+      gap: 4px;
+      padding: 11px;
+    }
+
+    .config-row code {
+      color: #25354d;
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 18px;
+      text-align: right;
+    }
+
+    @media (max-width: 1080px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        display: none;
+      }
+
+      .metrics,
+      .content-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      main {
+        padding: 18px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .actions {
+        justify-content: flex-start;
+      }
+
+      .metrics,
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Tracking blue/green cutover: west2 finance console is reading /etc/asterridge/ledger.env until the export worker is migrated. -->
+  <!-- Keeping vault item FIN-OPS-CONSOLE-07 mapped for Maren until quarter close batch jobs finish. -->
+  <div class="shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand">
+        <div class="brand-mark">AR</div>
+        <div>
+          <strong>Aster Ridge</strong>
+          <span>Finance Operations</span>
+        </div>
+      </div>
+      <nav class="nav-group">
+        <div class="nav-label">Workspace</div>
+        <a class="nav-link active" href="#overview"><span>Overview</span><span>01</span></a>
+        <a class="nav-link" href="#payments"><span>Payments</span><span>02</span></a>
+        <a class="nav-link" href="#users"><span>Users</span><span>03</span></a>
+        <a class="nav-link" href="#audit"><span>Audit</span><span>04</span></a>
+        <a class="nav-link" href="settlement_queue.html"><span>Settlement queue</span><span>05</span></a>
+      </nav>
+      <nav class="nav-group">
+        <div class="nav-label">Exports</div>
+        <a class="nav-link" href="data/users.csv" download><span>User roster</span><span>CSV</span></a>
+        <a class="nav-link" href="data/payments.csv" download><span>Payments</span><span>CSV</span></a>
+        <a class="nav-link" href="data/audit_logs.csv" download><span>Audit log</span><span>CSV</span></a>
+      </nav>
+      <div class="sidebar-card">
+        <strong>Quarter Close</strong>
+        <span>Batch exports enabled until 2026-05-24 18:00 PT.</span>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <h1>Revenue Assurance Dashboard</h1>
+          <p>Operational view for payment holds, account access, and reconciliation exports.</p>
+        </div>
+        <div class="actions">
+          <a class="button" href="data/audit_logs.csv" download>Export audit</a>
+          <a class="button" href="data/users.csv" download>Export users</a>
+          <a class="button" href="settlement_queue.html">Settlement queue</a>
+          <button class="button primary" type="button" id="override-button">Release hold</button>
+        </div>
+      </header>
+
+      <section class="grid metrics" id="overview" aria-label="Dashboard metrics">
+        <article class="metric">
+          <label>Open amount</label>
+          <strong>$217.4K</strong>
+          <small>Across 8 reconciliation items</small>
+          <div class="bar"><span class="blue" style="width: 72%"></span></div>
+        </article>
+        <article class="metric">
+          <label>Payment holds</label>
+          <strong>4</strong>
+          <small>Two require manager review</small>
+          <div class="bar"><span class="amber" style="width: 48%"></span></div>
+        </article>
+        <article class="metric">
+          <label>Privileged users</label>
+          <strong>3</strong>
+          <small>Global, billing, and integration roles</small>
+          <div class="bar"><span class="red" style="width: 38%"></span></div>
+        </article>
+        <article class="metric">
+          <label>Export jobs</label>
+          <strong>12</strong>
+          <small>Last generated at 07:31 PT</small>
+          <div class="bar"><span class="teal" style="width: 64%"></span></div>
+        </article>
+      </section>
+
+      <section class="grid content-grid">
+        <div class="grid">
+          <article class="panel" id="payments">
+            <div class="panel-header">
+              <div>
+                <h2>Payment Reconciliation</h2>
+                <span>Loaded from close-window export data</span>
+              </div>
+              <a class="button" href="data/payments.csv" download>Download CSV</a>
+            </div>
+            <div class="search-row">
+              <input id="payment-filter" type="search" placeholder="Search payments, customers, owners">
+              <select id="payment-status">
+                <option value="">All statuses</option>
+                <option value="Pending">Pending</option>
+                <option value="Ready">Ready</option>
+                <option value="Hold">Hold</option>
+              </select>
+            </div>
+            <div class="table-wrap">
+              <table id="payments-table">
+                <thead>
+                  <tr>
+                    <th>Payment</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Owner note</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="panel" id="users">
+            <div class="panel-header">
+              <div>
+                <h2>Account Access</h2>
+                <span>Finance console users and session references</span>
+              </div>
+              <a class="button" href="data/users.csv" download>Download CSV</a>
+            </div>
+            <div class="search-row">
+              <input id="user-filter" type="search" placeholder="Search users, roles, session refs">
+            </div>
+            <div class="table-wrap">
+              <table id="users-table">
+                <thead>
+                  <tr>
+                    <th>User</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Status</th>
+                    <th>Session</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </article>
+        </div>
+
+        <aside class="grid">
+          <article class="panel" id="audit">
+            <div class="panel-header">
+              <div>
+                <h2>Recent Activity</h2>
+                <span>Selected console and service events</span>
+              </div>
+            </div>
+            <div class="list" id="audit-list"></div>
+          </article>
+
+          <article class="panel admin-panel" id="admin-panel">
+            <div class="panel-header">
+              <div>
+                <h2>Admin Runtime Context</h2>
+                <span>Visible for current privileged session</span>
+              </div>
+            </div>
+            <div class="config-grid" id="runtime-config"></div>
+          </article>
+        </aside>
+      </section>
+
+      <p class="footer-note">Console build 2026.05.22.0742 - finance-west2</p>
+    </main>
+  </div>
+
+  <script type="text/plain" id="users-csv">user_id,full_name,email,role,department,account_status,last_login,customer_tier,phone,account_id,session_ref,operator_note
+USR-1007,Arrell Patel,arrell.patel@asterridge.corp,Global Admin,Finance Operations,Active,2026-05-21 21:46:12,Enterprise,+1-415-555-0138,AC-774219,SESS-4B7F-93A2,Quarter close owner with unrestricted export access
+USR-1042,Maren Kline,maren.kline@asterridge.corp,Billing Manager,Revenue Operations,Active,2026-05-21 18:12:44,Enterprise,+1-628-555-0184,AC-774220,SESS-9A11-1CF8,Can approve payment holds below 25000 USD
+USR-1179,Devon Ibarra,devon.ibarra@asterridge.corp,Support Lead,Customer Operations,Active,2026-05-20 09:33:27,Premier,+1-510-555-0162,AC-774231,SESS-3C8D-44AA,Handles escalated refund cases for east region
+USR-1214,Priya Shah,priya.shah@asterridge.corp,Analyst,Finance Operations,Suspended,2026-05-13 14:28:09,Standard,+1-408-555-0196,AC-774242,SESS-6D20-8B01,Account retained for invoice reconciliation
+USR-1288,Evan Park,evan.park@asterridge.corp,Read Only Auditor,Corporate Audit,Active,2026-05-19 07:51:38,Enterprise,+1-650-555-0171,AC-774255,SESS-112C-7F39,Reviews export events before board package
+USR-1326,Sofia Reyes,sofia.reyes@asterridge.corp,Collections Specialist,Revenue Operations,Active,2026-05-21 16:04:55,Premier,+1-925-555-0149,AC-774268,SESS-8871-0DA4,May contact customers with overdue invoices
+USR-1441,Miles Carter,miles.carter@asterridge.corp,Integration Owner,Platform Operations,Active,2026-05-22 06:41:19,Enterprise,+1-415-555-0178,AC-774271,SESS-2A6E-55C0,Owns ledger worker service account mapping
+USR-1510,Nadia Flores,nadia.flores@asterridge.corp,Contractor,Finance Operations,Pending Review,2026-05-11 11:22:31,Standard,+1-669-555-0188,AC-774289,SESS-71BF-442D,Temporary access extended for close support</script>
+
+  <script type="text/plain" id="payments-csv">payment_id,customer_name,billing_email,invoice_id,amount_usd,card_last4,bank_account_ref,invoice_status,next_action,owner_note
+PAY-447002,Valeworks Holdings,ap@valeworks.corp,INV-2026-7741,18420.50,4481,ACH-7729-1184,Released,Send settlement notice,Maren confirmed callback with revenue director
+PAY-447018,Lumenbay Retail,payables@lumenbay.corp,INV-2026-7760,9420.00,1934,ACH-8840-4417,Pending Hold,Review address mismatch,Shipping address changed after invoice approval
+PAY-447029,Cinderfield Labs,billing@cinderfield.corp,INV-2026-7774,55102.75,6028,ACH-5519-3301,Pending Approval,Manager review required,Amount exceeds automatic approval threshold
+PAY-447036,Ardent Grove Studio,finance@ardentgrove.corp,INV-2026-7782,1260.00,8092,ACH-2380-7712,Ready,Queue nightly batch,Low value account with clean history
+PAY-447044,Halcyon Harbor Co,invoice@halcyonharbor.corp,INV-2026-7795,7345.25,1180,ACH-4491-6607,Overdue,Send collection reminder,Customer requested copy of original statement
+PAY-447057,Northpass Market,accounting@northpass.corp,INV-2026-7806,21990.00,7750,ACH-9910-3022,Manual Review,Validate remittance detail,Wire memo missing invoice reference
+PAY-447069,Silverline Civic,payments@silverlinecivic.corp,INV-2026-7817,3890.40,2744,ACH-3104-5588,Ready,Queue nightly batch,Standing terms renewed through June
+PAY-447081,Bridgepoint Archive,finance@bridgepointarchive.corp,INV-2026-7821,150000.00,4409,ACH-7055-9012,Executive Hold,Escalate for approval,Strategic account credit review in progress</script>
+
+  <script type="text/plain" id="audit-csv">event_id,event_time,actor,source_ip,action,result,record_id,service,details
+EVT-900180,2026-05-22 06:54:22,arrell.patel,10.44.18.72,export_users_csv,success,JOB-781104,finance-console,Exported full user roster with account notes
+EVT-900181,2026-05-22 06:58:03,maren.kline,10.44.21.31,release_payment_hold,success,PAY-447002,ledger-api,Released payment hold after phone confirmation
+EVT-900182,2026-05-22 07:06:41,devon.ibarra,203.0.113.42,view_customer_profile,success,AC-774231,customer-console,Viewed support timeline and billing memo
+EVT-900183,2026-05-22 07:14:09,svc-ledger-export,10.47.2.15,create_export_job,success,JOB-781119,export-worker,Created nightly export for billing and audit datasets
+EVT-900184,2026-05-22 07:19:36,priya.shah,198.51.100.27,login_console,blocked,USR-1214,identity-gateway,Suspended account attempted dashboard sign-in
+EVT-900185,2026-05-22 07:21:48,arrell.patel,10.44.18.72,open_admin_panel,success,CFG-4410,finance-console,Viewed runtime config and service routing values
+EVT-900186,2026-05-22 07:25:50,miles.carter,10.44.19.88,rotate_export_token,success,KEY-1182,export-worker,Updated export worker token value for close window
+EVT-900187,2026-05-22 07:31:02,nadia.flores,192.0.2.61,download_payments_csv,success,JOB-781121,finance-console,Downloaded payment reconciliation file</script>
+
+  <script>
+    const signedInUser = {
+      userId: "USR-1007",
+      name: "Arrell Patel",
+      role: "Global Admin",
+      department: "Finance Operations",
+      sessionId: "S-20260522-AR-7719",
+      access: ["billing.export", "payments.release", "users.manage", "runtime.view"]
+    };
+
+    const runtimeConfig = {
+      environment: "production",
+      region: "us-west-2",
+      ledgerApi: "http://ledger-api.finops.asterridge.corp/v1",
+      identityGateway: "http://idp-gateway.login.asterridge.corp/session",
+      exportWorker: "http://export-worker-01.batch.asterridge.corp/jobs",
+      billingApiKey: "ak_live_8hTn4V9qR2mP6xLd3sWcY1zB0eF7gH5j",
+      sessionVaultToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhcnJlbGwucGF0ZWwiLCJyb2xlIjoiYWRtaW4iLCJlbnYiOiJwcm9kdWN0aW9uIn0.gJ2kclm7uGdyC0F4KaqoRkK6Wn7ZpQ9mYcG2SPFyW8s",
+      databaseDsn: "postgres://ledger_app:w3F9rV6qLp2sM7nQ@pg-ledger-01.db.asterridge.corp:5432/finance",
+      adminOverrideCode: "RKG-284917-7731",
+      exportRetentionDays: "45",
+      approvalBypass: "enabled_for_close_window"
+    };
+
+    const state = {
+      users: [],
+      payments: [],
+      auditLogs: []
+    };
+
+    function parseCsv(text) {
+      const lines = text.trim().split(/\r?\n/);
+      const headers = lines.shift().split(",");
+
+      return lines.map((line) => {
+        const values = line.split(",");
+        return headers.reduce((row, header, index) => {
+          row[header] = values[index] || "";
+          return row;
+        }, {});
+      });
+    }
+
+    function statusClass(value) {
+      if (/released|ready|active|success/i.test(value)) {
+        return "green";
+      }
+
+      if (/hold|pending|review|blocked|suspended/i.test(value)) {
+        return "amber";
+      }
+
+      return "red";
+    }
+
+    function money(value) {
+      return Number(value).toLocaleString("en-US", {
+        currency: "USD",
+        style: "currency"
+      });
+    }
+
+    function getEmbeddedCsv(id) {
+      return document.getElementById(id).textContent;
+    }
+
+    function renderPayments(rows) {
+      const tableBody = document.querySelector("#payments-table tbody");
+      tableBody.innerHTML = rows.map((row) => `
+        <tr>
+          <td><strong>${row.payment_id}</strong><br>${row.invoice_id}</td>
+          <td>${row.customer_name}<br><span>${row.billing_email}</span></td>
+          <td>${money(row.amount_usd)}<br><span>${row.bank_account_ref} / ${row.card_last4}</span></td>
+          <td><span class="status ${statusClass(row.invoice_status)}">${row.invoice_status}</span><br>${row.next_action}</td>
+          <td>${row.owner_note}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderUsers(rows) {
+      const tableBody = document.querySelector("#users-table tbody");
+      tableBody.innerHTML = rows.map((row) => `
+        <tr>
+          <td><strong>${row.full_name}</strong><br>${row.user_id}</td>
+          <td>${row.email}<br>${row.phone}</td>
+          <td>${row.role}<br><span>${row.department}</span></td>
+          <td><span class="status ${statusClass(row.account_status)}">${row.account_status}</span><br>${row.customer_tier}</td>
+          <td>${row.session_ref}<br><span>${row.operator_note}</span></td>
+        </tr>
+      `).join("");
+    }
+
+    function renderAudit(rows) {
+      const auditList = document.getElementById("audit-list");
+      auditList.innerHTML = rows.slice(0, 6).map((row) => `
+        <div class="record">
+          <strong>${row.action} - ${row.result}</strong>
+          <span>${row.event_time} - ${row.actor} - ${row.source_ip}</span>
+          <span>${row.service} / ${row.record_id}</span>
+          <span>${row.details}</span>
+        </div>
+      `).join("");
+    }
+
+    function renderRuntimeConfig() {
+      const isAdmin = signedInUser.role === "Global Admin";
+      const panel = document.getElementById("admin-panel");
+      const configTarget = document.getElementById("runtime-config");
+
+      if (!isAdmin) {
+        panel.classList.remove("visible");
+        return;
+      }
+
+      panel.classList.add("visible");
+      configTarget.innerHTML = Object.entries(runtimeConfig).map(([key, value]) => `
+        <div class="config-row">
+          <strong>${key}</strong>
+          <code>${value}</code>
+        </div>
+      `).join("");
+    }
+
+    function filterRows(rows, query) {
+      const normalizedQuery = query.trim().toLowerCase();
+      if (!normalizedQuery) {
+        return rows;
+      }
+
+      return rows.filter((row) => Object.values(row).join(" ").toLowerCase().includes(normalizedQuery));
+    }
+
+    function applyFilters() {
+      const paymentQuery = document.getElementById("payment-filter").value;
+      const paymentStatus = document.getElementById("payment-status").value;
+      const userQuery = document.getElementById("user-filter").value;
+
+      let paymentRows = filterRows(state.payments, paymentQuery);
+      if (paymentStatus) {
+        paymentRows = paymentRows.filter((row) => row.invoice_status.includes(paymentStatus));
+      }
+
+      renderPayments(paymentRows);
+      renderUsers(filterRows(state.users, userQuery));
+    }
+
+    function loadData() {
+      state.users = parseCsv(getEmbeddedCsv("users-csv"));
+      state.payments = parseCsv(getEmbeddedCsv("payments-csv"));
+      state.auditLogs = parseCsv(getEmbeddedCsv("audit-csv"));
+
+      renderPayments(state.payments);
+      renderUsers(state.users);
+      renderAudit(state.auditLogs);
+      renderRuntimeConfig();
+    }
+
+    document.getElementById("payment-filter").addEventListener("input", applyFilters);
+    document.getElementById("payment-status").addEventListener("change", applyFilters);
+    document.getElementById("user-filter").addEventListener("input", applyFilters);
+    document.getElementById("override-button").addEventListener("click", () => {
+      const releasePayload = {
+        actor: signedInUser.userId,
+        overrideCode: runtimeConfig.adminOverrideCode,
+        endpoint: runtimeConfig.ledgerApi,
+        paymentId: "PAY-447018"
+      };
+
+      window.sessionStorage.setItem("lastReleasePayload", JSON.stringify(releasePayload));
+      alert("Hold release queued for PAY-447018");
+    });
+
+    loadData();
+  </script>
+</body>
+</html>

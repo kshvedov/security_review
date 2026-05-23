@@ -1,0 +1,9 @@
+payment_id,customer_name,billing_email,invoice_id,amount_usd,card_last4,bank_account_ref,invoice_status,next_action,owner_note
+PAY-447002,Valeworks Holdings,ap@valeworks.corp,INV-2026-7741,18420.50,4481,ACH-7729-1184,Released,Send settlement notice,Maren confirmed callback with revenue director
+PAY-447018,Lumenbay Retail,payables@lumenbay.corp,INV-2026-7760,9420.00,1934,ACH-8840-4417,Pending Hold,Review address mismatch,Shipping address changed after invoice approval
+PAY-447029,Cinderfield Labs,billing@cinderfield.corp,INV-2026-7774,55102.75,6028,ACH-5519-3301,Pending Approval,Manager review required,Amount exceeds automatic approval threshold
+PAY-447036,Ardent Grove Studio,finance@ardentgrove.corp,INV-2026-7782,1260.00,8092,ACH-2380-7712,Ready,Queue nightly batch,Low value account with clean history
+PAY-447044,Halcyon Harbor Co,invoice@halcyonharbor.corp,INV-2026-7795,7345.25,1180,ACH-4491-6607,Overdue,Send collection reminder,Customer requested copy of original statement
+PAY-447057,Northpass Market,accounting@northpass.corp,INV-2026-7806,21990.00,7750,ACH-9910-3022,Manual Review,Validate remittance detail,Wire memo missing invoice reference
+PAY-447069,Silverline Civic,payments@silverlinecivic.corp,INV-2026-7817,3890.40,2744,ACH-3104-5588,Ready,Queue nightly batch,Standing terms renewed through June
+PAY-447081,Bridgepoint Archive,finance@bridgepointarchive.corp,INV-2026-7821,150000.00,4409,ACH-7055-9012,Executive Hold,Escalate for approval,Strategic account credit review in progress

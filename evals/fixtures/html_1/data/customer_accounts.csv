@@ -1,0 +1,9 @@
+account_id,customer_name,primary_contact,email,phone,billing_address,tax_ref,credit_limit_usd,current_balance_usd,settlement_status,last_change,owner
+AC-774219,Valeworks Holdings,Noelle Stone,noelle.stone@valeworks.corp,+1-212-555-0140,441 Mercer Street New York NY 10012,EIN-84-4910728,250000,18420.50,Ready,2026-05-22 06:58:03,Maren Kline
+AC-774220,Lumenbay Retail,Colin Mercer,colin.mercer@lumenbay.corp,+1-312-555-0165,2806 Lakeview Avenue Chicago IL 60614,EIN-27-6301942,75000,9420.00,Address Review,2026-05-22 07:02:44,Sofia Reyes
+AC-774231,Cinderfield Labs,Anika Rowe,anika.rowe@cinderfield.corp,+1-617-555-0119,71 Fellsway Plaza Boston MA 02114,EIN-61-2284901,400000,55102.75,Manager Review,2026-05-22 07:11:29,Arrell Patel
+AC-774242,Ardent Grove Studio,Beckett Lane,beckett.lane@ardentgrove.corp,+1-206-555-0176,920 Aurora Lane Seattle WA 98109,EIN-73-8401955,50000,1260.00,Ready,2026-05-22 07:16:58,Nadia Flores
+AC-774255,Halcyon Harbor Co,Mira Cantu,mira.cantu@halcyonharbor.corp,+1-305-555-0132,402 Harbor Walk Miami FL 33131,EIN-52-7048119,125000,7345.25,Collections,2026-05-22 07:20:13,Sofia Reyes
+AC-774268,Northpass Market,Jonah Bell,jonah.bell@northpass.corp,+1-303-555-0192,1880 Larimer Parkway Denver CO 80202,EIN-35-1927704,200000,21990.00,Remittance Review,2026-05-22 07:27:10,Maren Kline
+AC-774271,Silverline Civic,Elena Wright,elena.wright@silverlinecivic.corp,+1-512-555-0181,310 Congress Terrace Austin TX 78701,EIN-90-4481207,90000,3890.40,Ready,2026-05-22 07:29:46,Nadia Flores
+AC-774289,Bridgepoint Archive,Tomas Keller,tomas.keller@bridgepointarchive.corp,+1-646-555-0155,118 West 39th Street New York NY 10018,EIN-14-7835206,600000,150000.00,Executive Hold,2026-05-22 07:35:04,Arrell Patel

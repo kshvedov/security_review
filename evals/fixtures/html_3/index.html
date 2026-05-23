@@ -1,0 +1,548 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portfolio Planning</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --ink: #1d2735;
+      --muted: #657184;
+      --panel: #ffffff;
+      --soft: #f8fafc;
+      --line: #d9e1eb;
+      --nav: #142233;
+      --blue: #2a6da8;
+      --green: #2f7d52;
+      --amber: #a66b18;
+      --shadow: 0 18px 42px rgba(29, 39, 53, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 232px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .rail {
+      background: var(--nav);
+      color: #e9eff7;
+      padding: 24px 18px;
+    }
+
+    .brand {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .brand-mark {
+      background: #d8a63f;
+      border-radius: 8px;
+      color: #142233;
+      display: grid;
+      font-weight: 800;
+      height: 38px;
+      place-items: center;
+      width: 38px;
+    }
+
+    .brand strong,
+    .brand span {
+      display: block;
+    }
+
+    .brand span,
+    .nav-label {
+      color: #a9b8ca;
+      font-size: 12px;
+    }
+
+    .nav-label {
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin: 26px 10px 8px;
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      border-radius: 8px;
+      color: #d8e4f2;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      padding: 10px 11px;
+      text-decoration: none;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      background: #233952;
+    }
+
+    main {
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .topbar {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .muted,
+    .topbar p {
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    button {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 700;
+      min-height: 38px;
+      padding: 8px 12px;
+    }
+
+    button.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #ffffff;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      min-height: 120px;
+      padding: 18px;
+    }
+
+    .metric label {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .metric small {
+      color: var(--muted);
+      display: block;
+      margin-top: 10px;
+    }
+
+    .content {
+      grid-template-columns: minmax(0, 1.45fr) minmax(320px, 0.75fr);
+      margin-top: 18px;
+    }
+
+    .panel {
+      overflow: hidden;
+    }
+
+    .panel-header {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 16px;
+    }
+
+    .panel-header h2 {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .panel-body {
+      padding: 16px;
+    }
+
+    .bars {
+      display: grid;
+      gap: 14px;
+    }
+
+    .bar-row {
+      display: grid;
+      gap: 7px;
+    }
+
+    .bar-head {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .track {
+      background: #e5ebf2;
+      border-radius: 999px;
+      height: 10px;
+      overflow: hidden;
+    }
+
+    .fill {
+      background: var(--blue);
+      display: block;
+      height: 100%;
+    }
+
+    .side-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .tag {
+      border-radius: 999px;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 9px;
+    }
+
+    .tag.green {
+      background: #e8f5ee;
+      color: var(--green);
+    }
+
+    .tag.amber {
+      background: #fff4df;
+      color: var(--amber);
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 18px;
+      text-align: right;
+    }
+
+    @media (max-width: 1020px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        display: none;
+      }
+
+      .metrics,
+      .content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      main {
+        padding: 18px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .metrics,
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="rail">
+      <div class="brand">
+        <div class="brand-mark">PP</div>
+        <div>
+          <strong>Portfolio Planning</strong>
+          <span>Scenario Workspace</span>
+        </div>
+      </div>
+      <div class="nav-label">Workspace</div>
+      <a class="nav-link active" href="#overview"><span>Overview</span><span>01</span></a>
+      <a class="nav-link" href="#trend"><span>Trend</span><span>02</span></a>
+      <a class="nav-link" href="#signals"><span>Signals</span><span>03</span></a>
+      <div class="nav-label">Views</div>
+      <a class="nav-link" href="#cohorts"><span>Cohorts</span><span>4</span></a>
+      <a class="nav-link" href="#blend"><span>Blend</span><span>8</span></a>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <h1>Planning Overview</h1>
+          <p>Aggregate scenario movement across anonymous cohorts and package groups.</p>
+        </div>
+        <div class="actions">
+          <button type="button" id="reset-view">Reset view</button>
+          <button class="primary" type="button" id="narrow-view">Narrow band</button>
+        </div>
+      </header>
+
+      <section class="grid metrics" id="overview" aria-label="Planning metrics">
+        <article class="metric">
+          <label>Model pulse</label>
+          <strong id="pulse">84</strong>
+          <small>Weighted across active groups</small>
+        </article>
+        <article class="metric">
+          <label>Blend</label>
+          <strong id="blend">62%</strong>
+          <small>Median package movement</small>
+        </article>
+        <article class="metric">
+          <label>Variance</label>
+          <strong id="variance">7.8</strong>
+          <small>Rolling four-period view</small>
+        </article>
+        <article class="metric">
+          <label>Signals</label>
+          <strong id="signals-count">12</strong>
+          <small>Active in current scenario</small>
+        </article>
+      </section>
+
+      <section class="grid content">
+        <article class="panel" id="trend">
+          <div class="panel-header">
+            <h2>Cohort Trend</h2>
+            <span class="muted">Aggregate view</span>
+          </div>
+          <div class="panel-body">
+            <div class="bars" id="trend-bars"></div>
+          </div>
+        </article>
+
+        <aside class="grid" id="signals">
+          <article class="panel">
+            <div class="panel-header">
+              <h2>Scenario Signals</h2>
+              <span class="muted">Current view</span>
+            </div>
+            <div class="panel-body side-list" id="signal-list"></div>
+          </article>
+
+          <article class="panel" id="cohorts">
+            <div class="panel-header">
+              <h2>Cohort Mix</h2>
+              <span class="muted">Anonymous groups</span>
+            </div>
+            <div class="panel-body side-list" id="cohort-list"></div>
+          </article>
+        </aside>
+      </section>
+
+      <p class="footer-note" id="stamp">Updated 2026-05-22 09:04 PT</p>
+    </main>
+  </div>
+
+  <script>
+    const planningState = (() => {
+      const forecastFrame = {
+        q_next: { delta_bps: -72, revision_factor: 0.84, exposure_band: "upper-3", variance: 18.4 },
+        q_plus_two: { delta_bps: 41, revision_factor: 1.12, exposure_band: "mid-2", variance: 9.7 }
+      };
+      const analyticEnvelope = {
+        event: "view_loaded",
+        attributes: { segment: "tier_a", renewal_band: "range_c", propensity: 0.68, confidence: 0.91, cohort: "c17" }
+      };
+      const switchboard = {
+        pkg_v4: "stage_2",
+        meter_basis: "usage_shift",
+        terms_refresh: "net45_curve",
+        plan_matrix: "matrix_c"
+      };
+      const trendSeries = [
+        { label: "P1", value: 58, holdback_group: "hb3", adjustment_factor: 0.82, review_bucket: "band_n", model_weight: 0.64 },
+        { label: "P2", value: 64, holdback_group: "hb3", adjustment_factor: 0.87, review_bucket: "band_n", model_weight: 0.68 },
+        { label: "P3", value: 72, holdback_group: "hb4", adjustment_factor: 0.91, review_bucket: "band_w", model_weight: 0.71 },
+        { label: "P4", value: 69, holdback_group: "hb4", adjustment_factor: 0.89, review_bucket: "band_w", model_weight: 0.7 }
+      ];
+      const exceptionLedger = {
+        slot: "e04",
+        code: "rate_lock",
+        path: "manual_path",
+        group: "exec_group",
+        basis_limit: 14.5
+      };
+      const routeState = {
+        active: "/workspace/compact",
+        dormant: "/scenario/scn-2026-q4-r17-b93/view/board-pack"
+      };
+      const display = {
+        metrics: { pulse: "84", blend: "62%", variance: "7.8", signals: "12" },
+        cohorts: [
+          ["Cohort A", "Stable movement", "green"],
+          ["Cohort B", "Manual review", "amber"],
+          ["Cohort C", "Steady mix", "green"]
+        ],
+        signals: [
+          ["Package blend", "Median movement inside expected range."],
+          ["Scenario drift", "Forward view remains below threshold."],
+          ["Coverage", "Twelve signals active in the current view."]
+        ]
+      };
+
+      function read() {
+        return {
+          analyticEnvelope,
+          display,
+          exceptionLedger,
+          forecastFrame,
+          routeState,
+          switchboard,
+          trendSeries
+        };
+      }
+
+      return { read };
+    })();
+
+    function setText(selector, value) {
+      document.querySelector(selector).textContent = value;
+    }
+
+    function drawBars(rows) {
+      const target = document.getElementById("trend-bars");
+      target.replaceChildren();
+
+      rows.forEach((row) => {
+        const item = document.createElement("div");
+        const head = document.createElement("div");
+        const label = document.createElement("span");
+        const value = document.createElement("strong");
+        const track = document.createElement("div");
+        const fill = document.createElement("span");
+
+        item.className = "bar-row";
+        head.className = "bar-head";
+        label.textContent = row.label;
+        value.textContent = `${row.value}%`;
+        track.className = "track";
+        fill.className = "fill";
+        fill.style.width = `${row.value}%`;
+        track.append(fill);
+        head.append(label, value);
+        item.append(head, track);
+        target.append(item);
+      });
+    }
+
+    function drawCards(targetId, rows) {
+      const target = document.getElementById(targetId);
+      target.replaceChildren();
+
+      rows.forEach(([title, body, tone]) => {
+        const card = document.createElement("div");
+        const heading = document.createElement("strong");
+        const text = document.createElement("span");
+
+        card.className = "card";
+        heading.textContent = title;
+        text.textContent = body;
+        if (tone) {
+          const tag = document.createElement("span");
+          tag.className = `tag ${tone}`;
+          tag.textContent = tone === "green" ? "Aligned" : "Watch";
+          card.append(tag);
+        }
+        card.append(heading, text);
+        target.append(card);
+      });
+    }
+
+    function loadView(filterMode) {
+      const state = planningState.read();
+      const rows = filterMode ? state.trendSeries.filter((row) => row.value > 60) : state.trendSeries;
+      setText("#pulse", state.display.metrics.pulse);
+      setText("#blend", state.display.metrics.blend);
+      setText("#variance", state.display.metrics.variance);
+      setText("#signals-count", state.display.metrics.signals);
+      drawBars(rows);
+      drawCards("signal-list", state.display.signals);
+      drawCards("cohort-list", state.display.cohorts);
+    }
+
+    document.getElementById("reset-view").addEventListener("click", () => {
+      loadView(false);
+      setText("#stamp", "Updated 2026-05-22 09:04 PT");
+    });
+
+    document.getElementById("narrow-view").addEventListener("click", () => {
+      loadView(true);
+      setText("#stamp", "Updated 2026-05-22 09:05 PT");
+    });
+
+    loadView(false);
+  </script>
+</body>
+</html>

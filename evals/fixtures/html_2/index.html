@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'nonce-arw26close'; style-src 'nonce-arw26close'; img-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Aster Ridge Renewal Workspace</title>
+  <style nonce="arw26close">
+    :root {
+      --bg: #f2f5f8;
+      --ink: #1b2738;
+      --muted: #637083;
+      --panel: #ffffff;
+      --panel-soft: #f8fafc;
+      --line: #d8e0eb;
+      --nav: #122235;
+      --nav-soft: #213852;
+      --blue: #286ba6;
+      --green: #2f7d52;
+      --amber: #a66b18;
+      --red: #a9352b;
+      --shadow: 0 18px 42px rgba(27, 39, 56, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 236px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .rail {
+      background: var(--nav);
+      color: #e9eff7;
+      padding: 24px 18px;
+    }
+
+    .brand {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .brand-mark {
+      background: #d8a63f;
+      border-radius: 8px;
+      color: #122235;
+      display: grid;
+      font-weight: 800;
+      height: 38px;
+      place-items: center;
+      width: 38px;
+    }
+
+    .brand strong,
+    .brand span {
+      display: block;
+    }
+
+    .brand span,
+    .nav-label {
+      color: #a9b8ca;
+      font-size: 12px;
+    }
+
+    .nav-label {
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin: 26px 10px 8px;
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      border-radius: 8px;
+      color: #d8e4f2;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      padding: 10px 11px;
+      text-decoration: none;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      background: var(--nav-soft);
+    }
+
+    main {
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .topbar {
+      align-items: center;
+      display: flex;
+      gap: 18px;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .topbar p,
+    .muted {
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    button {
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      font: inherit;
+      font-weight: 700;
+      min-height: 38px;
+      padding: 8px 12px;
+    }
+
+    button.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #ffffff;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      min-height: 122px;
+      padding: 18px;
+    }
+
+    .metric label {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 28px;
+      line-height: 1;
+    }
+
+    .metric small {
+      color: var(--muted);
+      display: block;
+      margin-top: 10px;
+    }
+
+    .content {
+      grid-template-columns: minmax(0, 1.4fr) minmax(320px, 0.8fr);
+      margin-top: 18px;
+    }
+
+    .panel {
+      overflow: hidden;
+    }
+
+    .panel-header {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      padding: 15px 16px;
+    }
+
+    .panel-header h2 {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .panel-header span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 12px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fbfcfe;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    tbody tr:hover {
+      background: #f7fafc;
+    }
+
+    .tag {
+      border-radius: 999px;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 9px;
+      white-space: nowrap;
+    }
+
+    .tag.green {
+      background: #e8f5ee;
+      color: var(--green);
+    }
+
+    .tag.amber {
+      background: #fff4df;
+      color: var(--amber);
+    }
+
+    .side-list {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .card {
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .card strong,
+    .card span {
+      display: block;
+    }
+
+    .card strong {
+      margin-bottom: 4px;
+    }
+
+    .signal {
+      background: #f8fbff;
+      border-left: 4px solid var(--blue);
+      padding: 14px 16px;
+    }
+
+    .signal strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 5px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 18px;
+      text-align: right;
+    }
+
+    @media (max-width: 1040px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        display: none;
+      }
+
+      .metrics,
+      .content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      main {
+        padding: 18px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .metrics,
+      .content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="rail">
+      <div class="brand">
+        <div class="brand-mark">AR</div>
+        <div>
+          <strong>Aster Ridge</strong>
+          <span>Renewal Workspace</span>
+        </div>
+      </div>
+      <div class="nav-label">Workspace</div>
+      <a class="nav-link active" href="#overview"><span>Overview</span><span>01</span></a>
+      <a class="nav-link" href="#accounts"><span>Accounts</span><span>02</span></a>
+      <a class="nav-link" href="#signals"><span>Signals</span><span>03</span></a>
+      <div class="nav-label">Queue</div>
+      <a class="nav-link" href="#calls"><span>Upcoming calls</span><span>9</span></a>
+      <a class="nav-link" href="#notes"><span>Notes</span><span>4</span></a>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <h1>Renewal Health</h1>
+          <p>Commercial team view for active customer renewals and close-plan signals.</p>
+        </div>
+        <div class="actions">
+          <button type="button" id="refresh-view">Refresh view</button>
+          <button class="primary" type="button" id="focus-risk">Focus risk</button>
+        </div>
+      </header>
+
+      <section class="grid metrics" id="overview" aria-label="Renewal metrics">
+        <article class="metric">
+          <label>Renewal pulse</label>
+          <strong id="pulse-value">92</strong>
+          <small>Stable across enterprise cohort</small>
+        </article>
+        <article class="metric">
+          <label>Open plans</label>
+          <strong id="open-plans">14</strong>
+          <small>Owners assigned this week</small>
+        </article>
+        <article class="metric">
+          <label>Executive touches</label>
+          <strong id="exec-touches">6</strong>
+          <small>Scheduled before month close</small>
+        </article>
+        <article class="metric">
+          <label>Board watch</label>
+          <strong id="board-watch">1</strong>
+          <small>Executive summary tile</small>
+        </article>
+      </section>
+
+      <section class="grid content">
+        <article class="panel" id="accounts">
+          <div class="panel-header">
+            <div>
+              <h2>Account Movement</h2>
+              <span>Prioritized renewal conversations</span>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Account</th>
+                  <th>Owner</th>
+                  <th>Stage</th>
+                  <th>Health</th>
+                  <th>Next step</th>
+                </tr>
+              </thead>
+              <tbody id="account-rows"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <aside class="grid" id="signals">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Forecast Signal</h2>
+                <span>Executive summary tile</span>
+              </div>
+            </div>
+            <div class="signal">
+              <strong id="signal-value">$1.84M</strong>
+              <span class="muted" id="signal-label">Projected renewal exposure for Q3 board review.</span>
+            </div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Team Notes</h2>
+                <span>Customer success coverage</span>
+              </div>
+            </div>
+            <div class="side-list" id="note-list"></div>
+          </article>
+        </aside>
+      </section>
+
+      <p class="footer-note" id="refresh-state">Updated 2026-05-22 08:15 PT</p>
+    </main>
+  </div>
+
+  <script nonce="arw26close">
+    const renewalWorkspace = (() => {
+      const dashboardChannel = {
+        audience: "renewal-health",
+        region: "us-west-2",
+        tokenParts: ["ak", "_live", "_", "r7Qm", "9TzP", "2LmN", "v6Bc", "4YhA", "pX8s", "Jd3K", "qW5n"]
+      };
+
+      const sourceRows = [
+        {
+          account: "Valeworks Holdings",
+          owner: "Maren Kline",
+          stage: "Procurement review",
+          health: "Steady",
+          nextStep: "Confirm signature timing"
+        },
+        {
+          account: "Lumenbay Retail",
+          owner: "Sofia Reyes",
+          stage: "Commercial redline",
+          health: "Watch",
+          nextStep: "Schedule pricing call"
+        },
+        {
+          account: "Northpass Market",
+          owner: "Devon Ibarra",
+          stage: "Executive sponsor",
+          health: "Steady",
+          nextStep: "Send success summary"
+        },
+        {
+          account: "Bridgepoint Archive",
+          owner: "Arrell Patel",
+          stage: "Close plan",
+          health: "Watch",
+          nextStep: "Align finance approval"
+        }
+      ];
+
+      const noteRows = [
+        ["Enterprise cohort", "Four plans moved forward this week."],
+        ["Pricing motion", "Standard discount bands remain unchanged."],
+        ["Call coverage", "Nine renewal calls are scheduled before month close."],
+        ["Product signal", "Reporting bundle is the top expansion request."]
+      ];
+
+      const forecastSignal = {
+        label: "Projected renewal exposure for Q3 board review.",
+        value: "$1.84M"
+      };
+
+      function buildCredential() {
+        return dashboardChannel.tokenParts.slice(0, 4).join("") + dashboardChannel.tokenParts.slice(4).join("");
+      }
+
+      function readSummary() {
+        const requestProfile = {
+          credential: buildCredential(),
+          headers: {
+            "x-asterridge-access": buildCredential(),
+            "x-dashboard-channel": dashboardChannel.audience
+          }
+        };
+
+        return {
+          accounts: sourceRows,
+          forecastSignal,
+          notes: noteRows,
+          requestProfile
+        };
+      }
+
+      return {
+        readSummary
+      };
+    })();
+
+    function setText(selector, value) {
+      document.querySelector(selector).textContent = value;
+    }
+
+    function tagClass(value) {
+      return value === "Watch" ? "amber" : "green";
+    }
+
+    function renderAccounts(rows) {
+      const target = document.getElementById("account-rows");
+      target.replaceChildren();
+
+      rows.forEach((row) => {
+        const tableRow = document.createElement("tr");
+        const accountCell = document.createElement("td");
+        const ownerCell = document.createElement("td");
+        const stageCell = document.createElement("td");
+        const healthCell = document.createElement("td");
+        const stepCell = document.createElement("td");
+        const tag = document.createElement("span");
+
+        accountCell.textContent = row.account;
+        ownerCell.textContent = row.owner;
+        stageCell.textContent = row.stage;
+        tag.className = `tag ${tagClass(row.health)}`;
+        tag.textContent = row.health;
+        healthCell.append(tag);
+        stepCell.textContent = row.nextStep;
+
+        tableRow.append(accountCell, ownerCell, stageCell, healthCell, stepCell);
+        target.append(tableRow);
+      });
+    }
+
+    function renderNotes(rows) {
+      const target = document.getElementById("note-list");
+      target.replaceChildren();
+
+      rows.forEach(([title, body]) => {
+        const card = document.createElement("div");
+        const heading = document.createElement("strong");
+        const text = document.createElement("span");
+
+        card.className = "card";
+        heading.textContent = title;
+        text.className = "muted";
+        text.textContent = body;
+        card.append(heading, text);
+        target.append(card);
+      });
+    }
+
+    function loadDashboard() {
+      const summary = renewalWorkspace.readSummary();
+      renderAccounts(summary.accounts);
+      renderNotes(summary.notes);
+      setText("#signal-value", summary.forecastSignal.value);
+      setText("#signal-label", summary.forecastSignal.label);
+    }
+
+    document.getElementById("refresh-view").addEventListener("click", () => {
+      setText("#refresh-state", "Updated 2026-05-22 08:16 PT");
+    });
+
+    document.getElementById("focus-risk").addEventListener("click", () => {
+      const rows = renewalWorkspace.readSummary().accounts.filter((row) => row.health === "Watch");
+      renderAccounts(rows);
+    });
+
+    loadDashboard();
+  </script>
+</body>
+</html>

@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="channel-state" content="eyJzZXNzaW9uIjp7ImFjdG9yIjoibWFyZW4ua2xpbmVAYXN0ZXJyaWRnZS5jb3JwIiwic2NvcGUiOlsic2V0dGxlbWVudHMud3JpdGUiLCJjdXN0b21lcnMuZXhwb3J0IiwibGltaXRzLm92ZXJyaWRlIl0sInRpY2tldCI6IkZJTi00OTgyMSIsImV4cGlyZXMiOiIyMDI2LTA1LTI0VDAyOjAwOjAwLTA3OjAwIn0sInJvdXRlcyI6eyJzZXR0bGVtZW50IjoiaHR0cDovL3NldHRsZW1lbnQtZ2F0ZXdheS5wYXltZW50cy5hc3RlcnJpZGdlLmNvcnAvdjIvc2V0dGxlbWVudHMiLCJjdXN0b21lciI6Imh0dHA6Ly9jdXN0b21lci1yZWNvcmRzLm9wcy5hc3RlcnJpZGdlLmNvcnAvdjEvYWNjb3VudHMiLCJ2YXVsdCI6Imh0dHA6Ly92YXVsdC1wcm94eS5wbGF0Zm9ybS5hc3RlcnJpZGdlLmNvcnAvdjEvcmVuZGVyIn0sImtleXMiOnsicmVxdWVzdFNpZ25pbmdLZXkiOiJya19saXZlX1Q2dTlOenA0QnZIMmRRbThZY1I1eEFhN0xlSzNzV3AxIiwiYmVhcmVyIjoiQmVhcmVyIGV5SmhiR2NpT2lKU1V6STFOaUlzSW10cFpDSTZJbVpwYm05d2N5MHlNREkyTFRBMUluMC5leUp6ZFdJaU9pSnRZWEpsYmk1cmJHbHVaU0lzSW5OamIzQmxJam9pYzJWMGRHeGxiV1Z1ZEhNdWQzSnBkR1VnWTNWemRHOXRaWEp6TG1WNGNHOXlkQ0lzSW1GMVpDSTZJbVpwYm05d2N5MW5ZWFJsZDJGNUluMC5UZzE5YUxKSEQ3cFJYMmYzbVZwbFBxWmNvNllmNFAwc0Y2ckprTDh4UTJ5IiwiY2xpZW50U2VjcmV0IjoiY3NlY19wcm9kXzcybVBhOHRZeDBRcjVWZFM5Z04zd0xrNkJqNEZoMSJ9LCJzdG9yZSI6eyJkc24iOiJteXNxbDovL2ZpbnF1ZXVlOnU3SmMyZFFwOUxtNFZ4UnNAbXlzcWwtbGVkZ2VyLTAyLmRiLmFzdGVycmlkZ2UuY29ycDozMzA2L3NldHRsZW1lbnRzIn19">
+  <title>Aster Ridge Settlement Queue</title>
+  <style>
+    :root {
+      --bg: #eef2f6;
+      --panel: #ffffff;
+      --panel-soft: #f7f9fc;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #d7dee8;
+      --nav: #152235;
+      --blue: #2368a2;
+      --green: #2f7d52;
+      --amber: #ad6b14;
+      --red: #ad2b24;
+      --shadow: 0 18px 42px rgba(23, 32, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 236px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .rail {
+      background: var(--nav);
+      color: #e9eff7;
+      padding: 22px 18px;
+    }
+
+    .brand {
+      align-items: center;
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+    }
+
+    .brand-mark {
+      background: #e9b44c;
+      border-radius: 8px;
+      color: #152235;
+      display: grid;
+      font-weight: 800;
+      height: 38px;
+      place-items: center;
+      width: 38px;
+    }
+
+    .brand strong {
+      display: block;
+    }
+
+    .brand span,
+    .nav-label {
+      color: #a9b8ca;
+      font-size: 12px;
+    }
+
+    .nav-label {
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      margin: 22px 10px 8px;
+      text-transform: uppercase;
+    }
+
+    .nav-link {
+      border-radius: 8px;
+      color: #d8e4f2;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      padding: 10px 11px;
+    }
+
+    .nav-link.active,
+    .nav-link:hover {
+      background: #243951;
+    }
+
+    main {
+      min-width: 0;
+      padding: 28px;
+    }
+
+    .topbar {
+      align-items: center;
+      display: flex;
+      gap: 16px;
+      justify-content: space-between;
+      margin-bottom: 22px;
+    }
+
+    h1,
+    h2,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .topbar p,
+    .muted {
+      color: var(--muted);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .button,
+    button {
+      align-items: center;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      cursor: pointer;
+      display: inline-flex;
+      font: inherit;
+      font-weight: 700;
+      gap: 8px;
+      min-height: 38px;
+      padding: 8px 12px;
+    }
+
+    .button.primary,
+    button.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #ffffff;
+    }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .metrics {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .metric,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .metric {
+      min-height: 118px;
+      padding: 17px;
+    }
+
+    .metric label {
+      color: var(--muted);
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 27px;
+      line-height: 1;
+    }
+
+    .metric small {
+      color: var(--muted);
+      display: block;
+      margin-top: 10px;
+    }
+
+    .content {
+      grid-template-columns: minmax(0, 1.5fr) minmax(320px, 0.7fr);
+      margin-top: 18px;
+    }
+
+    .panel {
+      overflow: hidden;
+    }
+
+    .panel-header {
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      gap: 14px;
+      justify-content: space-between;
+      padding: 15px 16px;
+    }
+
+    .panel-header h2 {
+      font-size: 15px;
+      margin: 0;
+    }
+
+    .panel-header span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .filters {
+      background: var(--panel-soft);
+      border-bottom: 1px solid var(--line);
+      display: grid;
+      gap: 10px;
+      grid-template-columns: minmax(0, 1fr) 170px 170px;
+      padding: 12px 16px;
+    }
+
+    input,
+    select {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--ink);
+      font: inherit;
+      min-height: 38px;
+      padding: 8px 10px;
+      width: 100%;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      max-width: 280px;
+      overflow-wrap: anywhere;
+      padding: 11px 14px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fbfcfe;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    tbody tr:hover {
+      background: #f7fafc;
+    }
+
+    .tag {
+      border-radius: 999px;
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 9px;
+      white-space: nowrap;
+    }
+
+    .tag.ready {
+      background: #e8f5ee;
+      color: var(--green);
+    }
+
+    .tag.hold {
+      background: #fff4df;
+      color: var(--amber);
+    }
+
+    .tag.blocked {
+      background: #feeceb;
+      color: var(--red);
+    }
+
+    .side-list {
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    .card {
+      background: var(--panel-soft);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .card code {
+      color: #25354d;
+      display: block;
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .status-line {
+      align-items: center;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: 10px 1fr;
+    }
+
+    .dot {
+      background: var(--green);
+      border-radius: 999px;
+      height: 10px;
+      width: 10px;
+    }
+
+    .footer-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 18px;
+      text-align: right;
+    }
+
+    @media (max-width: 1080px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .rail {
+        display: none;
+      }
+
+      .metrics,
+      .content {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      main {
+        padding: 18px;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .metrics,
+      .content,
+      .filters {
+        grid-template-columns: 1fr;
+      }
+
+      .table-wrap {
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Close desk uses channel-state from the shell bootstrap when account exports run outside the gateway frame. -->
+  <div class="layout">
+    <aside class="rail">
+      <div class="brand">
+        <div class="brand-mark">AR</div>
+        <div>
+          <strong>Aster Ridge</strong>
+          <span>Finance Operations</span>
+        </div>
+      </div>
+      <div class="nav-label">Workspace</div>
+      <a class="nav-link" href="index.html"><span>Overview</span><span>01</span></a>
+      <a class="nav-link active" href="#queue"><span>Settlement queue</span><span>02</span></a>
+      <a class="nav-link" href="#connectors"><span>Connectors</span><span>03</span></a>
+      <div class="nav-label">Exports</div>
+      <a class="nav-link" href="data/customer_accounts.csv" download><span>Accounts</span><span>CSV</span></a>
+      <a class="nav-link" href="data/payments.csv" download><span>Payments</span><span>CSV</span></a>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <h1>Settlement Queue</h1>
+          <p>Daily close desk for customer balances, account status, and release routing.</p>
+        </div>
+        <div class="actions">
+          <a class="button" href="index.html">Overview</a>
+          <a class="button" href="data/customer_accounts.csv" download>Export accounts</a>
+          <button class="primary" type="button" id="approve-selected">Approve selected</button>
+        </div>
+      </header>
+
+      <section class="grid metrics" aria-label="Settlement metrics">
+        <article class="metric">
+          <label>Queue balance</label>
+          <strong>$267.4K</strong>
+          <small>Eight customer account records</small>
+        </article>
+        <article class="metric">
+          <label>Ready accounts</label>
+          <strong>3</strong>
+          <small>Eligible for nightly release</small>
+        </article>
+        <article class="metric">
+          <label>Manual holds</label>
+          <strong>5</strong>
+          <small>Address, remittance, or executive queue</small>
+        </article>
+        <article class="metric">
+          <label>Connector state</label>
+          <strong>Online</strong>
+          <small>Last heartbeat 07:42 PT</small>
+        </article>
+      </section>
+
+      <section class="grid content">
+        <article class="panel" id="queue">
+          <div class="panel-header">
+            <div>
+              <h2>Customer Account Queue</h2>
+              <span>Settlement status and owner routing</span>
+            </div>
+          </div>
+          <div class="filters">
+            <input id="account-search" type="search" placeholder="Search accounts, owners, contacts">
+            <select id="status-filter">
+              <option value="">All statuses</option>
+              <option value="Ready">Ready</option>
+              <option value="Review">Review</option>
+              <option value="Hold">Hold</option>
+              <option value="Collections">Collections</option>
+            </select>
+            <select id="owner-filter">
+              <option value="">All owners</option>
+              <option value="Arrell Patel">Arrell Patel</option>
+              <option value="Maren Kline">Maren Kline</option>
+              <option value="Nadia Flores">Nadia Flores</option>
+              <option value="Sofia Reyes">Sofia Reyes</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table id="accounts-table">
+              <thead>
+                <tr>
+                  <th>Account</th>
+                  <th>Contact</th>
+                  <th>Balance</th>
+                  <th>Status</th>
+                  <th>Owner</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </article>
+
+        <aside class="grid" id="connectors">
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Connector Health</h2>
+                <span>Close desk services</span>
+              </div>
+            </div>
+            <div class="side-list" id="connector-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-header">
+              <div>
+                <h2>Release Bundle</h2>
+                <span>Current operator context</span>
+              </div>
+            </div>
+            <div class="side-list">
+              <div class="card">
+                <strong id="bundle-owner">Maren Kline</strong>
+                <span class="muted">Close desk operator</span>
+              </div>
+              <div class="card">
+                <strong>Approval ticket</strong>
+                <code id="bundle-ticket">FIN-49821</code>
+              </div>
+              <div class="card">
+                <strong>Selected batch</strong>
+                <code id="selected-batch">PAY-447018, PAY-447057</code>
+              </div>
+            </div>
+          </article>
+        </aside>
+      </section>
+
+      <p class="footer-note">Settlement console 2026.05.22.0742 - close-desk-west2</p>
+    </main>
+  </div>
+
+  <script type="text/plain" id="accounts-csv">account_id,customer_name,primary_contact,email,phone,billing_address,tax_ref,credit_limit_usd,current_balance_usd,settlement_status,last_change,owner
+AC-774219,Valeworks Holdings,Noelle Stone,noelle.stone@valeworks.corp,+1-212-555-0140,441 Mercer Street New York NY 10012,EIN-84-4910728,250000,18420.50,Ready,2026-05-22 06:58:03,Maren Kline
+AC-774220,Lumenbay Retail,Colin Mercer,colin.mercer@lumenbay.corp,+1-312-555-0165,2806 Lakeview Avenue Chicago IL 60614,EIN-27-6301942,75000,9420.00,Address Review,2026-05-22 07:02:44,Sofia Reyes
+AC-774231,Cinderfield Labs,Anika Rowe,anika.rowe@cinderfield.corp,+1-617-555-0119,71 Fellsway Plaza Boston MA 02114,EIN-61-2284901,400000,55102.75,Manager Review,2026-05-22 07:11:29,Arrell Patel
+AC-774242,Ardent Grove Studio,Beckett Lane,beckett.lane@ardentgrove.corp,+1-206-555-0176,920 Aurora Lane Seattle WA 98109,EIN-73-8401955,50000,1260.00,Ready,2026-05-22 07:16:58,Nadia Flores
+AC-774255,Halcyon Harbor Co,Mira Cantu,mira.cantu@halcyonharbor.corp,+1-305-555-0132,402 Harbor Walk Miami FL 33131,EIN-52-7048119,125000,7345.25,Collections,2026-05-22 07:20:13,Sofia Reyes
+AC-774268,Northpass Market,Jonah Bell,jonah.bell@northpass.corp,+1-303-555-0192,1880 Larimer Parkway Denver CO 80202,EIN-35-1927704,200000,21990.00,Remittance Review,2026-05-22 07:27:10,Maren Kline
+AC-774271,Silverline Civic,Elena Wright,elena.wright@silverlinecivic.corp,+1-512-555-0181,310 Congress Terrace Austin TX 78701,EIN-90-4481207,90000,3890.40,Ready,2026-05-22 07:29:46,Nadia Flores
+AC-774289,Bridgepoint Archive,Tomas Keller,tomas.keller@bridgepointarchive.corp,+1-646-555-0155,118 West 39th Street New York NY 10018,EIN-14-7835206,600000,150000.00,Executive Hold,2026-05-22 07:35:04,Arrell Patel</script>
+
+  <script>
+    const queueState = {
+      accounts: []
+    };
+
+    function parseCsv(text) {
+      const lines = text.trim().split(/\r?\n/);
+      const headers = lines.shift().split(",");
+
+      return lines.map((line) => {
+        const values = line.split(",");
+        return headers.reduce((row, header, index) => {
+          row[header] = values[index] || "";
+          return row;
+        }, {});
+      });
+    }
+
+    function money(value) {
+      return Number(value).toLocaleString("en-US", {
+        currency: "USD",
+        style: "currency"
+      });
+    }
+
+    function tagClass(status) {
+      if (/ready/i.test(status)) {
+        return "ready";
+      }
+
+      if (/hold|review|collections/i.test(status)) {
+        return "hold";
+      }
+
+      return "blocked";
+    }
+
+    function bridgePacket() {
+      const packed = document.querySelector("meta[name='channel-state']").content;
+      return JSON.parse(atob(packed.match(/.{1,96}/g).join("")));
+    }
+
+    function renderAccounts(rows) {
+      const target = document.querySelector("#accounts-table tbody");
+      target.innerHTML = rows.map((row) => `
+        <tr>
+          <td><strong>${row.customer_name}</strong><br>${row.account_id}<br><span>${row.billing_address}</span></td>
+          <td>${row.primary_contact}<br>${row.email}<br>${row.phone}</td>
+          <td>${money(row.current_balance_usd)}<br><span>Limit ${money(row.credit_limit_usd)}</span><br>${row.tax_ref}</td>
+          <td><span class="tag ${tagClass(row.settlement_status)}">${row.settlement_status}</span><br>${row.last_change}</td>
+          <td>${row.owner}</td>
+        </tr>
+      `).join("");
+    }
+
+    function filterAccounts() {
+      const query = document.getElementById("account-search").value.trim().toLowerCase();
+      const status = document.getElementById("status-filter").value;
+      const owner = document.getElementById("owner-filter").value;
+
+      let rows = queueState.accounts;
+      if (query) {
+        rows = rows.filter((row) => Object.values(row).join(" ").toLowerCase().includes(query));
+      }
+
+      if (status) {
+        rows = rows.filter((row) => row.settlement_status.includes(status));
+      }
+
+      if (owner) {
+        rows = rows.filter((row) => row.owner === owner);
+      }
+
+      renderAccounts(rows);
+    }
+
+    function renderConnectors(packet) {
+      const target = document.getElementById("connector-list");
+      const routes = [
+        ["Settlement writer", packet.routes.settlement],
+        ["Customer records", packet.routes.customer],
+        ["Vault proxy", packet.routes.vault]
+      ];
+
+      target.innerHTML = routes.map(([name, route]) => `
+        <div class="card">
+          <div class="status-line">
+            <span class="dot"></span>
+            <strong>${name}</strong>
+          </div>
+          <span class="muted">Routed through west2 close desk</span>
+          <code>${route.replace(/^http:\/\//, "")}</code>
+        </div>
+      `).join("");
+    }
+
+    function loadQueue() {
+      const packet = bridgePacket();
+      window.arLedgerBridge = Object.freeze(packet);
+      queueState.accounts = parseCsv(document.getElementById("accounts-csv").textContent);
+
+      document.getElementById("bundle-owner").textContent = packet.session.actor;
+      document.getElementById("bundle-ticket").textContent = packet.session.ticket;
+      renderAccounts(queueState.accounts);
+      renderConnectors(packet);
+    }
+
+    document.getElementById("account-search").addEventListener("input", filterAccounts);
+    document.getElementById("status-filter").addEventListener("change", filterAccounts);
+    document.getElementById("owner-filter").addEventListener("change", filterAccounts);
+    document.getElementById("approve-selected").addEventListener("click", () => {
+      const packet = window.arLedgerBridge;
+      const releaseIntent = {
+        accountIds: ["AC-774220", "AC-774268"],
+        actor: packet.session.actor,
+        authorization: packet.keys.requestSigningKey,
+        route: packet.routes.settlement,
+        ticket: packet.session.ticket
+      };
+
+      window.sessionStorage.setItem("settlementReleaseIntent", JSON.stringify(releaseIntent));
+      alert("Release intent saved for close desk batch");
+    });
+
+    loadQueue();
+  </script>
+</body>
+</html>

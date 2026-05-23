@@ -1,0 +1,9 @@
+event_id,event_time,actor,source_ip,action,result,record_id,service,details
+EVT-900180,2026-05-22 06:54:22,arrell.patel,10.44.18.72,export_users_csv,success,JOB-781104,finance-console,Exported full user roster with account notes
+EVT-900181,2026-05-22 06:58:03,maren.kline,10.44.21.31,release_payment_hold,success,PAY-447002,ledger-api,Released payment hold after phone confirmation
+EVT-900182,2026-05-22 07:06:41,devon.ibarra,203.0.113.42,view_customer_profile,success,AC-774231,customer-console,Viewed support timeline and billing memo
+EVT-900183,2026-05-22 07:14:09,svc-ledger-export,10.47.2.15,create_export_job,success,JOB-781119,export-worker,Created nightly export for billing and audit datasets
+EVT-900184,2026-05-22 07:19:36,priya.shah,198.51.100.27,login_console,blocked,USR-1214,identity-gateway,Suspended account attempted dashboard sign-in
+EVT-900185,2026-05-22 07:21:48,arrell.patel,10.44.18.72,open_admin_panel,success,CFG-4410,finance-console,Viewed runtime config and service routing values
+EVT-900186,2026-05-22 07:25:50,miles.carter,10.44.19.88,rotate_export_token,success,KEY-1182,export-worker,Updated export worker token value for close window
+EVT-900187,2026-05-22 07:31:02,nadia.flores,192.0.2.61,download_payments_csv,success,JOB-781121,finance-console,Downloaded payment reconciliation file
