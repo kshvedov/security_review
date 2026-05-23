@@ -1,28 +1,178 @@
 # Security Review
 
-Security review skill for AI-assisted code, data, vendor, browser, and non-developer safety checks, with structured risk classification and expectation-based evals.
+Structured security review skill for AI-created code, data exposure, browser content, vendors, and non-developer safety checks.
 
-Short description:
+This repo contains an installable AI skill plus a small expectation-based eval set. The skill is designed to act as a review barrier: it classifies risk, preserves redaction, asks for safe context only, and gives defensive next steps without teaching exploitation.
+
+## What This Helps With
+
+Use this skill when you want to know whether something is safe to share, deploy, paste into an AI tool, send to a vendor, publish, or use in a workflow.
+
+Good fit:
+
+- AI-created code, scripts, configuration, dashboards, or automations
+- Secrets, tokens, keys, passwords, connection strings, and credential-like values
+- Customer data, employee data, private logs, screenshots, exports, and files
+- Browser-delivered HTML, JavaScript, hidden state, metadata, and bundled assets
+- Vendor sharing, AI tool use, no-code workflows, permissions, integrations, and access review
+- Non-developer questions like "Can I do this safely?" or "What should I fix first?"
+
+Not a fit:
+
+- Exploit development
+- Bypass instructions
+- Unauthorized testing
+- Live credential validation
+- Legal conclusions
+
+## How To Use It
+
+If the skill is installed in your AI tool, you do not need to say `Read skill/SKILL.md`.
+
+Ask your question in this shape:
 
 ```text
-Structured security review skill for AI-created code, data exposure, browser content, vendors, and non-developer safety checks.
+Analysis depth: Quick
+Output type: non-technical
+
+Question:
+Can I paste this redacted customer issue summary into an AI chat to make it clearer?
 ```
 
-## Purpose
+If your AI tool supports explicit skill names, you can also say:
 
-This repo contains a final Security Review Skill and a lean eval set for checking that the skill keeps its safety behavior over time.
+```text
+Use the security-review skill.
 
-The skill is intended to help with:
+Analysis depth: Medium
+Output type: technical
 
-- AI-created code and configuration review
-- Accidental data exposure checks
-- Secrets, credentials, logs, screenshots, files, and browser-delivered content
-- Vendor, AI tool, and non-developer action-safety questions
-- Structured Red, Orange, Yellow, Green, and Gray risk classification
+Question:
+Review this configuration before we deploy it.
+```
 
-This is not a penetration-testing or exploitation skill. It is a review barrier that classifies risk, preserves redaction, asks only for safe context, and provides defensive remediation.
+For local testing without installing the skill, use:
 
-## Layout
+```text
+Read `skill/SKILL.md`
+
+Analysis depth: Quick
+Output type: non-technical
+
+Question:
+<your security review question>
+```
+
+## Choose A Depth
+
+Use one of these depth levels:
+
+| Depth | Use when | Result style |
+|---|---|---|
+| Quick | You need fast triage or a simple action-safety answer. | Short decision, top risks, immediate next step. |
+| Medium | You need a normal security review. | Grouped major issue families, remediation, owner routing. |
+| Indepth | You need comprehensive review or final-gate confidence. | Broader issue-family coverage with representative evidence. |
+
+Depth changes the amount of detail only. It does not change the required audit format, safety rules, classification logic, redaction handling, or pass/fail logic.
+
+## Choose An Output Type
+
+Use one of these output types:
+
+| Output type | Use when |
+|---|---|
+| non-technical | You want plain-language risk and action guidance. |
+| technical | You want more implementation detail and security terminology. |
+
+The skill does not guess whether the user is technical. Say the output type you want.
+
+## Example Questions
+
+```text
+Analysis depth: Quick
+Output type: non-technical
+
+Question:
+Can I send these raw application logs to a vendor for debugging?
+```
+
+```text
+Analysis depth: Medium
+Output type: non-technical
+
+Question:
+I want to share this HTML dashboard with the whole company. Is it safe, and what should I fix first?
+```
+
+```text
+Analysis depth: Indepth
+Output type: technical
+
+Question:
+Review this AI invoice assistant design. It can read invoice emails, open attachments, compare spreadsheet rows, draft vendor replies, and update a shared tracker.
+```
+
+## What The Result Includes
+
+Every review uses the same audit structure:
+
+- Immediate answer
+- Decision summary
+- Red, Orange, Yellow, Green, and Gray finding sections
+- Evidence, known safe facts, unknowns, assumptions, and redactions
+- Required action, owner routing, safer alternative, and documentation guidance
+- Pass/fail explanation and notes
+
+The color model is:
+
+- Red: blocking risk
+- Orange: needs owner review
+- Yellow: fix, ticket, or accept
+- Green: supported as safe
+- Gray: not enough context
+
+## Safe Input Guidance
+
+Do not paste raw sensitive material into the chat. Provide safe summaries instead.
+
+Do not paste:
+
+- Raw secrets, tokens, passwords, private keys, session cookies, or connection strings
+- Raw customer records, employee records, private messages, support tickets, or sensitive logs
+- Private screenshots, signed URLs, reset links, magic links, or private file paths
+- Live credential test results or proof of access
+
+Prefer:
+
+- Redacted snippets
+- Synthetic examples
+- Data type and exposure surface
+- Intended audience
+- Owner and approval status
+- Access model and retention summary
+- Relevant safe configuration summaries
+
+## Evals
+
+This repo includes expectation-based evals to check that the skill keeps behaving correctly as it changes.
+
+```text
+evals/
+  prompts/
+  fixtures/
+  expected_checks.md
+```
+
+To run an eval manually:
+
+1. Open a prompt from `evals/prompts/`.
+2. Paste it into a fresh chat or review session.
+3. Compare the result to `evals/expected_checks.md`.
+4. Save temporary outputs under `evals/results/` if needed. That path is ignored by git.
+
+Do not judge evals by exact wording. Judge whether the result satisfies the required format and behavior checks.
+
+## Repo Layout
 
 ```text
 security_review/
@@ -36,43 +186,11 @@ security_review/
 ```
 
 - `skill/` is the installable skill package.
-- `evals/prompts/` contains reusable prompt inputs.
+- `skill/references/` contains the shared rules and depth-specific guidance.
+- `evals/prompts/` contains reusable prompts only.
 - `evals/fixtures/` contains sanitized local fixtures.
-- `evals/expected_checks.md` defines behavior expectations instead of exact golden answers.
+- `evals/expected_checks.md` contains expected behavior, not golden response text.
 
-Generated model responses should be saved outside the repo or under ignored paths such as `evals/results/`.
+## Safety Boundary
 
-## Use
-
-In a new chat or review session, start with:
-
-```text
-Read `skill/SKILL.md`
-
-Analysis depth: Quick / Medium / Indepth
-Output type: technical / non-technical
-
-Question:
-<your security review question>
-```
-
-Depth controls detail only. It must not change the required audit format, classification model, redaction rules, pass/fail logic, or safety boundaries.
-
-## Evals
-
-To run an eval manually:
-
-1. Open one prompt from `evals/prompts/`.
-2. Paste it into a fresh chat or review session.
-3. Compare the result to `evals/expected_checks.md`.
-4. Save temporary outputs under `evals/results/` if needed. That path is ignored by git.
-
-Do not rely on exact response text. Judge whether the result satisfies the required format and behavior checks.
-
-## Safety Boundaries
-
-- Do not request, paste, preserve, validate, decode, or test live secrets.
-- Do not reproduce raw PII, private screenshots, private URLs, raw logs, customer records, private messages, session cookies, tokens, passwords, private keys, or connection strings.
-- Redact sensitive values and describe only type, location, exposure surface, environment if known, data category, owner, and required action.
-- Do not include exploit payloads, bypass steps, unauthorized testing instructions, or credential-use instructions.
-- Do not provide legal conclusions. Escalate legal, privacy, and compliance-sensitive questions to the proper owner.
+This skill provides security review guidance, not legal advice and not authorization to test systems. It should escalate legal, privacy, compliance, credential, production, and sensitive-data uncertainty to the proper owner.
