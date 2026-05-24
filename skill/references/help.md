@@ -2,6 +2,8 @@
 
 Use this skill when you want a security review or a safe action check.
 
+Invoke it manually with `/security_review` or `$security-review`.
+
 ## Basic Prompt
 
 ```text
@@ -45,6 +47,16 @@ Output type: non-technical
 
 Question:
 I want to share this HTML dashboard with the whole company. Is it safe, and what should I fix first?
+```
+
+```text
+$security-review
+
+Analysis depth: Medium
+Output type: technical
+
+Question:
+Review this configuration before we deploy it.
 ```
 
 ```text

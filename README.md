@@ -27,17 +27,17 @@ Not a fit:
 
 ## How To Use It
 
+If the skill is installed in your AI tool, call it explicitly. This avoids accidental activation and avoids expensive deep reviews when you only wanted a normal answer.
+
 ### Quick Install From Zip
 
-If your AI tool supports importing a skill from a zip file, download `security_review.zip` from this repo and import it.
+If your AI tool supports importing a skill from a zip file, download the final `security-review.zip` release artifact and import it into Claude or Codex.
 
-The zip contains the installable `skill/` package only. It does not include eval fixtures or generated responses.
+The zip contains the installable `skill/` package only. It does not include eval fixtures, repo docs, or generated responses.
 
 After import, call the skill explicitly with `/security_review`.
 
-If you edit the source files under `skill/`, regenerate `security_review.zip` before sharing it.
-
-If the skill is installed in your AI tool, call it explicitly. This avoids accidental activation and avoids expensive deep reviews when you only wanted a normal answer.
+If you edit the source files under `skill/`, regenerate `security-review.zip` before sharing it.
 
 Ask your question in this shape:
 
@@ -57,16 +57,22 @@ For a short usage guide after installation, ask:
 /security_review help
 ```
 
-or:
+For Codex-style invocation, use:
 
 ```text
-security_review --help
+$security-review
+
+Analysis depth: Medium
+Output type: technical
+
+Question:
+Review this configuration before we deploy it.
 ```
 
 If your AI tool does not support slash commands, you can also say:
 
 ```text
-Use the security_review skill.
+Use the security-review skill.
 
 Analysis depth: Medium
 Output type: technical

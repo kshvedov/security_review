@@ -1,11 +1,8 @@
 ---
-name: security_review
-description: >-
-  TRIGGER ONLY on explicit invocation: /security_review, the literal phrase
-  security_review, or a direct request to run, use, or get help with the
-  security review skill. Do NOT trigger from general security questions,
-  security keywords, code/config content, or topical similarity. Once invoked,
-  this skill performs structured security review and action-safety checks.
+name: "security-review"
+description: "Manual-only skill. Use only after explicit /security_review, $security-review, security-review, or security_review invocation. Runs structured security reviews and action-safety checks."
+disable-model-invocation: true
+user-invocable: true
 ---
 
 # Security Review Skill
@@ -14,13 +11,13 @@ This `SKILL.md` is a lean router. Load reference files as needed, classify risk,
 
 ## Activation Boundary
 
-This is an explicit-invocation skill. Use it only when the user invokes `/security_review`, writes `security_review`, or directly asks to run, use, or get help with this skill.
+This is a manual-invocation skill. Use it only when the user invokes `/security_review`, `$security-review`, writes `security-review` or `security_review`, or directly asks to run, use, or get help with this skill.
 
 Do not activate this skill from security-related topic similarity alone.
 
 ## Help Requests
 
-If the user asks for help using this skill, including `/security_review help`, `/security_review --help`, `security_review --help`, `help`, or "how do I use this skill?", read `references/help.md` and answer with the concise usage guide. Do not use the full audit output format for help-only requests.
+If the user asks for help using this skill, including `/security_review help`, `/security_review --help`, `$security-review help`, `security-review --help`, `help`, or "how do I use this skill?", read `references/help.md` and answer with the concise usage guide. Do not use the full audit output format for help-only requests.
 
 Do not auto-select Indepth unless the user explicitly requests Indepth, deep, comprehensive, full, final-gate, or release-blocking review.
 

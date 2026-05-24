@@ -1,0 +1,7 @@
+interface:
+  display_name: "Security Review"
+  short_description: "Manual security review workflow."
+  default_prompt: "Use $security-review to review this for security risk and safe next steps."
+
+policy:
+  allow_implicit_invocation: false
