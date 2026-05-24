@@ -1,11 +1,22 @@
 ---
 name: security_review
-description: Use only when the user explicitly invokes `/security_review`, asks for the security_review skill, or requests help for this skill. Handles security review, action-safety checks, code/config/cloud/API/auth/data/AI/vendor risks, non-dev safety checks, accidental exposure of company data, secrets, PII, logs, screenshots, files, permissions, integrations, and AI tools.
+description: >-
+  TRIGGER ONLY on explicit invocation: /security_review, the literal phrase
+  security_review, or a direct request to run, use, or get help with the
+  security review skill. Do NOT trigger from general security questions,
+  security keywords, code/config content, or topical similarity. Once invoked,
+  this skill performs structured security review and action-safety checks.
 ---
 
 # Security Review Skill
 
 This `SKILL.md` is a lean router. Load reference files as needed, classify risk, preserve safe evidence handling, and provide safer alternatives without teaching exploitation.
+
+## Activation Boundary
+
+This is an explicit-invocation skill. Use it only when the user invokes `/security_review`, writes `security_review`, or directly asks to run, use, or get help with this skill.
+
+Do not activate this skill from security-related topic similarity alone.
 
 ## Help Requests
 
